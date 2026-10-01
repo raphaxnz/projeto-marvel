@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Marvel</string>
+    <string name="marvel_logo">MARVEL</string>
+    <string name="skip">Pular</string>
+    <string name="next">Próximo</string>
+    <string name="start">Começar</string>
+    <string name="home">Home</string>
+    <string name="search">Busca</string>
+    <string name="timeline">Linha do tempo</string>
+    <string name="featured_heroes">Heróis em destaque</string>
+    <string name="teams">Equipes</string>
+    <string name="explore_characters">Explore os seus personagens</string>
+    <string name="search_hint">Pesquise personagens, equipes…</string>
+    <string name="about">Sobre</string>
+    <string name="powers">Poderes</string>
+    <string name="first_appearance">Primeira aparição</string>
+    <string name="birth">Nascimento</string>
+    <string name="featured_comics">HQs em destaque</string>
+    <string name="members">Membros</string>
+    <string name="comics">HQs</string>
+    <string name="view_all">Ver todas</string>
+    <string name="all_eras">Todas as épocas</string>
+    <string name="characters">Personagens</string>
+    <string name="publication">Publicação</string>
+    <string name="year">Ano</string>
+    <string name="back">Voltar</string>
+    <string name="favorite">Favoritar personagem</string>
+    <string name="theme_toggle">Alternar tema</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="7dp" android:orientation="vertical">
+    <TextView android:id="@+id/tv_cover" android:layout_width="match_parent" android:layout_height="190dp" android:background="@drawable/bg_banner_red" android:gravity="center" android:padding="8dp" android:textColor="@color/white" android:textSize="20sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/tv_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:ellipsize="end" android:maxLines="2" android:textColor="@color/white" android:textSize="13sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/tv_issue" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/app_text_secondary" android:textSize="12sp"/>
+</LinearLayout>

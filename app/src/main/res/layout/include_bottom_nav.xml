@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_nav"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_nav_height"
+    android:background="@color/app_surface_muted"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingHorizontal="28dp">
+
+    <ImageButton
+        android:id="@+id/btn_nav_home"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/touch_target"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/home"
+        android:padding="12dp"
+        android:src="@drawable/ic_home_24"
+        android:tint="@color/app_text_muted" />
+
+    <ImageButton
+        android:id="@+id/btn_nav_search"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/touch_target"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/search"
+        android:padding="12dp"
+        android:src="@drawable/ic_search_24"
+        android:tint="@color/app_text_muted" />
+
+    <ImageButton
+        android:id="@+id/btn_nav_timeline"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/touch_target"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/timeline"
+        android:padding="12dp"
+        android:src="@drawable/ic_timeline_24"
+        android:tint="@color/app_text_muted" />
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph" app:startDestination="@id/splashFragment">
+    <fragment android:id="@+id/splashFragment" android:name="com.aula.marvel.ui.splash.SplashFragment" android:label="Splash" />
+    <fragment android:id="@+id/onboardingFragment" android:name="com.aula.marvel.ui.onboarding.OnboardingFragment" android:label="Onboarding" />
+    <fragment android:id="@+id/homeFragment" android:name="com.aula.marvel.ui.home.HomeFragment" android:label="Home" />
+    <fragment android:id="@+id/searchFragment" android:name="com.aula.marvel.ui.search.SearchFragment" android:label="Busca" />
+    <fragment android:id="@+id/characterDetailFragment" android:name="com.aula.marvel.ui.character.CharacterDetailFragment" android:label="Personagem" />
+    <fragment android:id="@+id/teamFragment" android:name="com.aula.marvel.ui.team.TeamFragment" android:label="Equipe" />
+    <fragment android:id="@+id/teamMembersFragment" android:name="com.aula.marvel.ui.team.TeamMembersFragment" android:label="Membros" />
+    <fragment android:id="@+id/comicsFragment" android:name="com.aula.marvel.ui.comics.ComicsFragment" android:label="HQs" />
+    <fragment android:id="@+id/timelineFragment" android:name="com.aula.marvel.ui.timeline.TimelineFragment" android:label="Linha do tempo" />
+    <fragment android:id="@+id/timelineDetailFragment" android:name="com.aula.marvel.ui.timeline.TimelineDetailFragment" android:label="Arco" />
+</navigation>
