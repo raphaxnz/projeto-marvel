@@ -1,9 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#1E1E1E">
-    <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:contentDescription="@null" android:scaleType="fitXY" android:src="@drawable/figma_timeline_dark" />
-    <View android:id="@+id/tapBack" android:layout_width="64dp" android:layout_height="72dp"
-        android:layout_gravity="top|start" android:clickable="true" android:focusable="true"
-        android:contentDescription="Voltar" />
-</FrameLayout>
+<!--
+  Detalhe do arco. Figma 36:721:
+    toolbar back + título 20/500 + sol ·
+    header 412x228 @ y=99 (imagem + scrim; capa 116x180 @ (25,123); ano 14/400 @ (151,163);
+    título 22/600 @ (150,183); autores 14/400 @ (151,218); badge equipe 60dp @ (341,242)) ·
+    "Sobre" 20/500 @ y=338 + texto 14/300 · info card (bookmark Publicação | calendário Ano) ·
+    "Personagens" 20/500 + bolinhas 80dp · bottom nav
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_marginTop="@dimen/toolbar_top_margin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
+
+            <!-- Header -->
+            <ImageView
+                android:id="@+id/ivHeader"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/team_header_height"
+                android:layout_marginTop="19dp"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/img_arc_phoenix_header"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_header_scrim"
+                app:layout_constraintBottom_toBottomOf="@id/ivHeader"
+                app:layout_constraintTop_toTopOf="@id/ivHeader" />
+
+
+            <ImageView
+                android:id="@+id/ivCover"
+                android:layout_width="116dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/bg_comic_placeholder"
+                android:contentDescription="@null"
+                android:elevation="4dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/ivHeader"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivHeader"
+                tools:src="@drawable/img_arc_phoenix" />
+
+            <TextView
+                android:id="@+id/tvYear"
+                style="@style/Text.Marvel.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="2dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/tvArcTitle"
+                app:layout_constraintStart_toEndOf="@id/ivCover"
+                tools:text="1980" />
+
+            <TextView
+                android:id="@+id/tvArcTitle"
+                style="@style/Text.Marvel.CardTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="@dimen/screen_padding"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:maxLines="2"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/ivHeader"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivCover"
+                app:layout_constraintTop_toTopOf="@id/ivHeader"
+                app:layout_constraintVertical_bias="0.46"
+                tools:text="Saga da Fênix Negra" />
+
+            <TextView
+                android:id="@+id/tvAuthors"
+                style="@style/Text.Marvel.Body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="56dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivCover"
+                app:layout_constraintTop_toBottomOf="@id/tvArcTitle"
+                tools:text="Chris Claremont e John Byrne" />
+
+            <ImageView
+                android:id="@+id/ivTeamBadge"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="14dp"
+                android:contentDescription="@null"
+                android:src="@drawable/img_badge_xmen"
+                app:layout_constraintBottom_toBottomOf="@id/ivHeader"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Sobre -->
+            <TextView
+                android:id="@+id/tvAboutTitle"
+                style="@style/Text.Marvel.Section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/screen_padding"
+                android:layout_marginTop="11dp"
+                android:text="@string/about"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivHeader" />
+
+            <TextView
+                android:id="@+id/tvAbout"
+                style="@style/Text.Marvel.BodyLight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_padding"
+                android:layout_marginTop="7dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAboutTitle"
+                tools:text="O poder da Fênix começa a consumir Jean Grey, colocando os X-Men diante de uma escolha capaz de decidir o destino do universo." />
+
+            <include
+                android:id="@+id/infoCard"
+                layout="@layout/include_info_card"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/info_card_height"
+                android:layout_marginHorizontal="@dimen/screen_padding"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAbout" />
+
+            <!-- Personagens -->
+            <TextView
+                android:id="@+id/tvCharactersTitle"
+                style="@style/Text.Marvel.Section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/screen_padding"
+                android:layout_marginTop="15dp"
+                android:text="@string/characters"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/infoCard" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCharacters"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/avatar_art_size"
+                android:layout_marginTop="9dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingHorizontal="14dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tvCharactersTitle"
+                tools:listitem="@layout/item_hero_circle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/bottom_nav"
+        layout="@layout/include_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_nav_height"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

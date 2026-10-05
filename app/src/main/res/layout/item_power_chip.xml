@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chip de poder (Figma: 140x35 r20 azul #022D99, texto 15/500 branco) -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Marvel.PowerChip"
+    android:layout_width="wrap_content"
+    android:layout_height="35dp"
+    android:minWidth="120dp"
+    tools:text="Teletransporte" />

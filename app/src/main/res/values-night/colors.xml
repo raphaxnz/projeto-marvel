@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema ESCURO — valores exatos do Figma -->
+    <color name="app_background">#1E1E1E</color>
+    <color name="app_surface">#262626</color>
+    <color name="app_surface_high">#343434</color>
+    <color name="app_search_bg">#262626</color>
+    <color name="app_nav_bg">#191919</color>
+    <color name="app_text_primary">#FFFFFF</color>
+    <color name="app_text_secondary">#A8A8A8</color>
+    <color name="app_text_muted">#696969</color>
+    <color name="app_icon_inactive">#4C4C4C</color>
+    <color name="app_dot_inactive">#FFFFFF</color>
+    <color name="app_divider">#4C4C4C</color>
+    <color name="app_timeline_line">#A90C08</color>
+    <!-- Cor de cada equipe em textos/ícones (tom ajustado ao tema) -->
+    <color name="team_xmen_accent">#DBBA15</color>
+    <color name="team_avengers_accent">#A90C08</color>
+    <color name="team_fantastic_accent">#4A86E8</color>
+</resources>

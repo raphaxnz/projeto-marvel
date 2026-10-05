@@ -1,29 +1,65 @@
 <resources>
     <string name="app_name">Marvel</string>
     <string name="marvel_logo">MARVEL</string>
+    <string name="marvel_studios">MARVEL STUDIOS</string>
+
+    <!-- Onboarding -->
     <string name="skip">Pular</string>
     <string name="next">Próximo</string>
     <string name="start">Começar</string>
+    <string name="onboarding_title_1">Explore os personagens</string>
+    <string name="onboarding_desc_1">Conheça seus poderes, histórias e principais aparições.</string>
+    <string name="onboarding_title_2">Descubra as equipes</string>
+    <string name="onboarding_desc_2">Veja integrantes, informações e HQs dos X-Men, Vingadores e Quarteto Fantástico.</string>
+    <string name="onboarding_title_3">Viaje a linha do tempo</string>
+    <string name="onboarding_desc_3">Acompanhe os principais arcos e momentos de cada equipe.</string>
+
+    <!-- Navegação -->
     <string name="home">Home</string>
     <string name="search">Busca</string>
     <string name="timeline">Linha do tempo</string>
+    <string name="back">Voltar</string>
+    <string name="theme_toggle">Alternar tema</string>
+
+    <!-- Home -->
     <string name="featured_heroes">Heróis em destaque</string>
     <string name="teams">Equipes</string>
     <string name="explore_characters">Explore os seus personagens</string>
+    <string name="team_xmen">X-Men</string>
+    <string name="team_avengers">Vingadores</string>
+    <string name="team_fantastic_four">Quarteto Fantástico</string>
+
+    <!-- Busca -->
     <string name="search_hint">Pesquise personagens, equipes…</string>
+    <string name="favorite">Favoritar personagem</string>
+
+    <!-- Personagem -->
     <string name="about">Sobre</string>
     <string name="powers">Poderes</string>
     <string name="first_appearance">Primeira aparição</string>
-    <string name="birth">Nascimento</string>
-    <string name="featured_comics">HQs em destaque</string>
+    <string name="birthday">Aniversário</string>
+    <string name="featured_comics">HQ´s em destaque</string>
+
+    <!-- Equipe -->
     <string name="members">Membros</string>
-    <string name="comics">HQs</string>
+    <string name="members_count">Integrantes</string>
+    <string name="comics">HQ´s</string>
     <string name="view_all">Ver todas</string>
+    <string name="previous_member">Membro anterior</string>
+    <string name="next_member">Próximo membro</string>
+
+    <!-- Linha do tempo -->
     <string name="all_eras">Todas as épocas</string>
+    <string name="filter">Filtrar</string>
     <string name="characters">Personagens</string>
     <string name="publication">Publicação</string>
     <string name="year">Ano</string>
-    <string name="back">Voltar</string>
-    <string name="favorite">Favoritar personagem</string>
-    <string name="theme_toggle">Alternar tema</string>
+    <string name="issues">Edições</string>
+
+    <string name="filter_by_year">Filtrar por ano</string>
+    <string name="more_filters">Mais filtros</string>
+    <string name="filter_with_description">Somente com descrição</string>
+    <string name="filter_with_issue">Somente com edições</string>
+    <string name="apply">Aplicar</string>
+    <string name="timeline_empty">Nenhum arco encontrado para este filtro.</string>
 </resources>

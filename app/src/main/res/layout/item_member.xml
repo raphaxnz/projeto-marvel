@@ -1,5 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/member_panel" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginHorizontal="6dp" android:background="@color/app_blue">
-    <TextView android:id="@+id/tv_member_art" android:layout_width="220dp" android:layout_height="220dp" android:background="@drawable/bg_circle_red" android:gravity="center" android:textColor="@color/white" android:textSize="54sp" android:textStyle="bold" app:layout_constraintBottom_toTopOf="@id/tv_member_name" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.55"/>
-    <TextView android:id="@+id/tv_member_name" style="@style/TextAppearance.Marvel.Display" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginHorizontal="26dp" android:layout_marginBottom="70dp" android:textAllCaps="false" android:textSize="38sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+<!--
+  Membros. Figma 8/9/10 (página de referência 412x834dp, abaixo da toolbar), tudo em % da página:
+    painel 370x600 (90% x 72%) ancorado embaixo; posição horizontal por viés no adapter ·
+    faixas laterais 100x580 (24% x 69,5%): esq=anterior, dir=próximo ·
+    arte quadrada na largura da página, topo a 10,5% · nome até 2 linhas com auto-size (50sp → 22sp),
+    base a 8,2% do fundo, para nomes longos (ex.: "feiticeira escarlate") nunca cortarem.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gArtTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1055" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gNameBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.918" />
+
+    <View
+        android:id="@+id/vSidePrev"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.695"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.243" />
+
+    <View
+        android:id="@+id/vSideNext"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.695"
+        app:layout_constraintWidth_percent="0.243" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPanel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.72"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.898" />
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/Text.Marvel.Hero"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginEnd="20dp"
+        android:autoSizeMaxTextSize="50sp"
+        android:autoSizeMinTextSize="22sp"
+        android:autoSizeTextType="uniform"
+        android:breakStrategy="balanced"
+        android:gravity="bottom|start"
+        android:hyphenationFrequency="none"
+        android:includeFontPadding="false"
+        android:lineSpacingMultiplier="0.9"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@id/gNameBottom"
+        app:layout_constraintEnd_toEndOf="@id/cardPanel"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintStart_toStartOf="@id/cardPanel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
+        tools:text="feiticeira escarlate" />
+
+    <ImageView
+        android:id="@+id/ivArt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gArtTop"
+        tools:src="@drawable/img_char_noturno" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,59 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Onboarding (Figma 41:980): Ellipse 10 380x380 gradiente + personagem recortado por cima.
+  O círculo é o maior quadrado que cabe na página, limitado a ~92% da largura (380/412 no Figma),
+  então nunca corta em telas menores (ex.: S25 em zoom padrão).
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/screen_padding">
+    android:clipChildren="false">
 
-    <TextView
-        android:id="@+id/tv_hero_mark"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:background="@drawable/bg_circle_red"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/layout_dots"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
-
-    <LinearLayout
-        android:id="@+id/layout_dots"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gCircleStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_hero_mark">
-        <TextView android:id="@+id/dot_one" android:layout_width="12dp" android:layout_height="12dp" android:layout_margin="4dp" android:background="@drawable/bg_circle_red" />
-        <TextView android:id="@+id/dot_two" android:layout_width="8dp" android:layout_height="8dp" android:layout_margin="4dp" android:background="@drawable/bg_circle_red" android:alpha="0.25" />
-        <TextView android:id="@+id/dot_three" android:layout_width="8dp" android:layout_height="8dp" android:layout_margin="4dp" android:background="@drawable/bg_circle_red" android:alpha="0.25" />
-    </LinearLayout>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.0375" />
 
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/TextAppearance.Marvel.Title"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gCircleEnd"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_dots" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9625" />
 
-    <TextView
-        android:id="@+id/tv_description"
-        style="@style/TextAppearance.Marvel.Body"
+    <View
+        android:id="@+id/vCircle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        android:layout_height="0dp"
+        android:background="@drawable/bg_onboarding_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/gCircleEnd"
+        app:layout_constraintStart_toStartOf="@id/gCircleStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivArt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/vCircle"
+        app:layout_constraintEnd_toEndOf="@id/vCircle"
+        app:layout_constraintStart_toStartOf="@id/vCircle"
+        app:layout_constraintTop_toTopOf="@id/vCircle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

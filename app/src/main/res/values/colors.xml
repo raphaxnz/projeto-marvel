@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_background">#1E1E1E</color>
-    <color name="app_surface">#252525</color>
-    <color name="app_surface_high">#303030</color>
-    <color name="app_surface_muted">#171717</color>
-    <color name="app_primary">#D71920</color>
-    <color name="app_primary_dark">#A8070D</color>
-    <color name="app_text_primary">#FFFFFFFF</color>
-    <color name="app_text_secondary">#B8B8B8</color>
-    <color name="app_text_muted">#777777</color>
-    <color name="app_divider">#3A3A3A</color>
-    <color name="app_blue">#073BA9</color>
-    <color name="app_yellow">#E7C20A</color>
-    <color name="app_red_panel">#B90912</color>
-    <color name="app_chip_blue">#0B4BC8</color>
+    <!-- Marca (iguais nos dois temas) — extraídas do Figma "Marvel - Mobile" -->
+    <color name="marvel_red">#A90C08</color>
+    <color name="marvel_red_bright">#E23636</color>
+    <color name="marvel_red_deep">#430503</color>
+    <color name="marvel_yellow">#DBBA15</color>
+    <color name="marvel_blue">#022D99</color>
+    <color name="marvel_blue_deep">#011F69</color>
+    <color name="marvel_blue_light">#518CCA</color>
+    <color name="marvel_green">#2FAA02</color>
+    <!-- Paleta extra por personagem (cores dominantes do uniforme) -->
+    <color name="hero_purple">#5E2A84</color>
+    <color name="hero_orange">#D9620B</color>
+    <color name="hero_gray">#55606B</color>
+    <color name="hero_teal">#0E7C86</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Tema CLARO (default). Overrides em values-night/colors.xml -->
+    <color name="app_background">#FFFFFF</color>
+    <color name="app_surface">#E7E7E7</color>
+    <color name="app_surface_high">#DDDDDD</color>
+    <color name="app_search_bg">#E6E6E6</color>
+    <color name="app_nav_bg">#EEEEEE</color>
+    <color name="app_text_primary">#2B2B2B</color>
+    <color name="app_text_secondary">#6B6B6B</color>
+    <color name="app_text_muted">#696969</color>
+    <color name="app_icon_inactive">#A8A8A8</color>
+    <color name="app_dot_inactive">#CFCFCF</color>
+    <color name="app_divider">#CFCFCF</color>
+    <color name="app_timeline_line">#A90C08</color>
+
+    <!-- Aliases usados pela base existente -->
+    <color name="app_primary">@color/marvel_red</color>
+    <color name="app_primary_dark">@color/marvel_red_deep</color>
+    <color name="app_blue">@color/marvel_blue</color>
+    <color name="app_yellow">@color/marvel_yellow</color>
+    <color name="app_red_panel">@color/marvel_red</color>
+    <color name="app_chip_blue">@color/marvel_blue</color>
+    <color name="app_surface_muted">@color/app_nav_bg</color>
+    <!-- Cor de cada equipe em textos/ícones (tom ajustado ao tema) -->
+    <color name="team_xmen_accent">#9A7C00</color>
+    <color name="team_avengers_accent">#A90C08</color>
+    <color name="team_fantastic_accent">#022D99</color>
 </resources>

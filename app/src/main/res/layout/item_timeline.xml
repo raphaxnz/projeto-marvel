@@ -1,12 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingBottom="14dp">
-    <TextView android:id="@+id/tv_year" android:layout_width="50dp" android:layout_height="wrap_content" android:gravity="center" android:textColor="@color/white" android:textSize="16sp" android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="@id/card_event"/>
-    <View android:id="@+id/view_dot" android:layout_width="14dp" android:layout_height="14dp" android:layout_marginTop="2dp" android:background="@drawable/bg_circle_red" app:layout_constraintEnd_toStartOf="@id/card_event" app:layout_constraintStart_toEndOf="@id/tv_year" app:layout_constraintTop_toTopOf="@id/card_event"/>
-    <View android:id="@+id/view_line" android:layout_width="2dp" android:layout_height="0dp" android:background="@color/app_primary" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="@id/view_dot" app:layout_constraintStart_toStartOf="@id/view_dot" app:layout_constraintTop_toBottomOf="@id/view_dot"/>
-    <com.google.android.material.card.MaterialCardView android:id="@+id/card_event" style="@style/Widget.Marvel.Card" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/view_dot" app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp">
-            <TextView android:id="@+id/tv_cover" android:layout_width="78dp" android:layout_height="112dp" android:background="@drawable/bg_banner_red" android:gravity="center" android:text="X" android:textColor="@color/white" android:textSize="26sp" android:textStyle="bold"/>
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:orientation="vertical"><TextView android:id="@+id/tv_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/white" android:textSize="16sp" android:textStyle="bold"/><TextView android:id="@+id/tv_description" style="@style/TextAppearance.Marvel.Body" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:maxLines="3"/><TextView android:id="@+id/tv_issue" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:textColor="@color/white" android:textSize="12sp" android:textStyle="bold"/></LinearLayout>
-        </LinearLayout>
+<!--
+  Item da linha do tempo (Figma): coluna esquerda com ano 16/500 (x=0) e bolinha 25dp (x=45) +
+  linha vertical 3dp vermelha ligando ao próximo item; card 290x140 r15 à direita (x=80):
+  capa 77x120 @ (9,11) · título 16/500 @ (96,17) · descrição 9/300 · edições 11/400 no rodapé.
+  Altura do item = 140 (card) + 10 gap = 150dp.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <!-- Linha vertical (vai do topo do item até o fundo; o fragment esconde nas pontas) -->
+    <View
+        android:id="@+id/vLineTop"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@color/app_timeline_line"
+        app:layout_constraintBottom_toTopOf="@id/vDot"
+        app:layout_constraintEnd_toEndOf="@id/vDot"
+        app:layout_constraintStart_toStartOf="@id/vDot"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/vLineBottom"
+        android:layout_width="3dp"
+        android:layout_height="0dp"
+        android:background="@color/app_timeline_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/vDot"
+        app:layout_constraintStart_toStartOf="@id/vDot"
+        app:layout_constraintTop_toBottomOf="@id/vDot" />
+
+    <View
+        android:id="@+id/vDot"
+        android:layout_width="@dimen/timeline_dot"
+        android:layout_height="@dimen/timeline_dot"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="46dp"
+        android:background="@drawable/bg_timeline_dot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvYear"
+        style="@style/Text.Marvel.SmallSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/vDot"
+        app:layout_constraintEnd_toStartOf="@id/vDot"
+        app:layout_constraintTop_toTopOf="@id/vDot"
+        tools:text="1980" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        style="@style/Widget.Marvel.Card"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/timeline_card_height"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivCover"
+                android:layout_width="@dimen/timeline_cover_width"
+                android:layout_height="@dimen/timeline_cover_height"
+                android:layout_marginStart="9dp"
+                android:background="@drawable/bg_comic_placeholder"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/img_arc_phoenix" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/Text.Marvel.Label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivCover"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Saga da Fênix Negra" />
+
+            <TextView
+                android:minLines="2"
+                android:id="@+id/tvDescription"
+                style="@style/Text.Marvel.Micro"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="4dp"
+                android:ellipsize="end"
+                app:layout_constraintBottom_toTopOf="@id/tvIssue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                tools:text="O poder da Fênix começa a consumir Jean Grey, colocando os X-Men diante de uma escolha capaz de decidir o destino do universo." />
+
+            <TextView
+                android:id="@+id/tvIssue"
+                style="@style/Text.Marvel.Tiny"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvTitle"
+                tools:text="Edições #129 - #138." />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

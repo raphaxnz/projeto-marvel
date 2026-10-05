@@ -1,10 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" style="@style/Widget.Marvel.Card" android:layout_width="match_parent" android:layout_height="88dp" android:layout_marginBottom="12dp">
-    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="match_parent" android:padding="12dp">
-        <TextView android:id="@+id/tv_avatar" android:layout_width="60dp" android:layout_height="60dp" android:background="@drawable/bg_circle_blue" android:gravity="center" android:textColor="@color/white" android:textSize="18sp" android:textStyle="bold" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-        <TextView android:id="@+id/tv_name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:textColor="@color/app_text_primary" android:textSize="18sp" android:textStyle="bold" app:layout_constraintEnd_toStartOf="@id/btn_favorite" app:layout_constraintStart_toEndOf="@id/tv_avatar" app:layout_constraintTop_toTopOf="@id/tv_avatar" />
-        <TextView android:id="@+id/tv_real_name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:textColor="@color/app_text_secondary" android:textSize="13sp" app:layout_constraintEnd_toStartOf="@id/btn_favorite" app:layout_constraintStart_toEndOf="@id/tv_avatar" app:layout_constraintTop_toBottomOf="@id/tv_name" />
-        <TextView android:id="@+id/tv_team" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:layout_marginTop="4dp" android:background="@drawable/bg_chip_active" android:textColor="@color/white" android:textSize="11sp" app:layout_constraintStart_toEndOf="@id/tv_avatar" app:layout_constraintTop_toBottomOf="@id/tv_real_name" />
-        <ImageButton android:id="@+id/btn_favorite" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/favorite" android:padding="13dp" android:src="@drawable/ic_heart_24" android:tint="@color/app_primary" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
+<!--
+  Card de personagem (Busca). Figma 370x110 r25 fundo surface:
+    avatar 80x80 r25 @ (12,15) · nome 22/500 @ (106,15) · nome real 14/300 @ (106,46)
+    tag equipe 22dp altura r20 @ (104,72) · coração 28dp @ (317,41)
+-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Marvel.Card.Round"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/search_card_height"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/search_avatar"
+            android:layout_height="@dimen/search_avatar"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_image_placeholder"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Marvel.Avatar"
+            tools:src="@drawable/img_avatar_noturno" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/Text.Marvel.CardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@id/btnFavorite"
+            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Noturno" />
+
+        <TextView
+            android:id="@+id/tvRealName"
+            style="@style/Text.Marvel.BodyLight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@id/btnFavorite"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="Kurt Wagner" />
+
+        <TextView
+            android:id="@+id/tvTeam"
+            style="@style/Widget.Marvel.TeamTag"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvRealName"
+            tools:text="X-Men" />
+
+        <ImageButton
+            android:id="@+id/btnFavorite"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="14dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/favorite"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_heart_outline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/marvel_red" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

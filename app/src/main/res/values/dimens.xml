@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Figma: frame 412dp de largura, margem lateral 21dp -->
     <dimen name="space_xs">4dp</dimen>
     <dimen name="space_sm">8dp</dimen>
     <dimen name="space_md">16dp</dimen>
     <dimen name="space_lg">24dp</dimen>
     <dimen name="space_xl">32dp</dimen>
-    <dimen name="screen_padding">20dp</dimen>
-    <dimen name="card_radius">16dp</dimen>
-    <dimen name="chip_radius">18dp</dimen>
+    <dimen name="screen_padding">21dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_top_margin">24dp</dimen>
+    <dimen name="card_radius">15dp</dimen>
+    <dimen name="card_radius_lg">25dp</dimen>
+    <dimen name="chip_radius">20dp</dimen>
     <dimen name="touch_target">48dp</dimen>
-    <dimen name="bottom_nav_height">68dp</dimen>
-    <dimen name="hero_banner_height">190dp</dimen>
-    <dimen name="avatar_size">64dp</dimen>
-    <dimen name="comic_width">108dp</dimen>
-    <dimen name="comic_height">154dp</dimen>
+    <dimen name="bottom_nav_height">90dp</dimen>
+    <dimen name="hero_banner_height">220dp</dimen>
+    <dimen name="avatar_size">80dp</dimen>
+    <dimen name="avatar_art_size">114dp</dimen>
+    <dimen name="team_card_width">180dp</dimen>
+    <dimen name="team_card_height">117dp</dimen>
+    <dimen name="comic_width">100dp</dimen>
+    <dimen name="comic_height">156dp</dimen>
+    <dimen name="search_card_height">110dp</dimen>
+    <dimen name="search_avatar">80dp</dimen>
+    <dimen name="info_card_height">80dp</dimen>
+    <dimen name="team_header_height">228dp</dimen>
+    <dimen name="character_header_height">250dp</dimen>
+    <dimen name="timeline_card_height">140dp</dimen>
+    <dimen name="timeline_cover_width">77dp</dimen>
+    <dimen name="timeline_cover_height">120dp</dimen>
+    <dimen name="timeline_dot">25dp</dimen>
+    <dimen name="logo_width">120dp</dimen>
+    <dimen name="logo_height">31dp</dimen>
 </resources>

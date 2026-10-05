@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Card de informações (Figma 370x80 r15, fundo surface).
+  Usado em Equipe (Primeira aparição | Integrantes) e Detalhe do arco (Publicação | Ano).
+  Ícones 28dp cinza #4C4C4C, labels 13/400 secundário, valores 13/500 primário, divisor vertical 40dp.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/info_card_height"
+    android:background="@drawable/bg_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="12dp">
+
+    <ImageView
+        android:id="@+id/ivInfoIcon1"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_calendar"
+        app:tint="@color/app_icon_inactive" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvInfoLabel1"
+            style="@style/Text.Marvel.SmallSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/first_appearance" />
+
+        <TextView
+            android:id="@+id/tvInfoValue1"
+            style="@style/Text.Marvel.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="X-Men #1 - 1980" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="12dp"
+        android:background="@color/app_divider" />
+
+    <ImageView
+        android:id="@+id/ivInfoIcon2"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_group"
+        app:tint="@color/app_icon_inactive" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvInfoLabel2"
+            style="@style/Text.Marvel.SmallSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/members_count" />
+
+        <TextView
+            android:id="@+id/tvInfoValue2"
+            style="@style/Text.Marvel.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="20 membros" />
+    </LinearLayout>
+</LinearLayout>

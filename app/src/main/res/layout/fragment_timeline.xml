@@ -1,27 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Linha do tempo. Figma 33:531:
+    toolbar logo + sol · "Linha do tempo" 28/500 @ y=99 ·
+    chips de equipe 35dp r20 @ y=154 (ativo #430503, inativo surface) ·
+    barra de filtro 370x40 r15 @ y=207 (calendário | "Todas as épocas" 14/400 + chevron-down | sliders) ·
+    lista: ano 16/500 @ x=21 · bolinha 25dp @ x=66 · linha vertical vermelha · card 290x140 r15 @ x=101
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#1E1E1E">
-    <ImageView android:layout_width="0dp" android:layout_height="0dp" android:contentDescription="@null"
-        android:scaleType="fitXY" android:src="@drawable/figma_search_alt_dark"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
-    <View android:id="@+id/tapFirstEvent" android:layout_width="0dp" android:layout_height="0dp"
-        android:clickable="true" android:focusable="true" android:contentDescription="Abrir Saga da Fênix Negra"
-        app:layout_constraintWidth_percent="0.92" app:layout_constraintHeight_percent="0.21"
-        app:layout_constraintHorizontal_bias="0.5" app:layout_constraintVertical_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
-    <View android:id="@+id/tapHome" android:layout_width="0dp" android:layout_height="0dp"
-        android:clickable="true" android:focusable="true" android:contentDescription="Início"
-        app:layout_constraintWidth_percent="0.33" app:layout_constraintHeight_percent="0.10"
-        app:layout_constraintHorizontal_bias="0" app:layout_constraintVertical_bias="1"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
-    <View android:id="@+id/tapSearch" android:layout_width="0dp" android:layout_height="0dp"
-        android:clickable="true" android:focusable="true" android:contentDescription="Busca"
-        app:layout_constraintWidth_percent="0.33" app:layout_constraintHeight_percent="0.10"
-        app:layout_constraintHorizontal_bias="0.5" app:layout_constraintVertical_bias="1"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_marginTop="@dimen/toolbar_top_margin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPageTitle"
+        style="@style/Text.Marvel.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/screen_padding"
+        android:layout_marginTop="19dp"
+        android:text="@string/timeline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <HorizontalScrollView
+        android:id="@+id/teamChipsScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="@dimen/screen_padding"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/tvPageTitle">
+
+        <LinearLayout
+            android:id="@+id/teamChips"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/chipXmen"
+                style="@style/Widget.Marvel.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_chip_team"
+                android:textColor="@color/chip_team_text"
+                android:text="@string/team_xmen" />
+
+            <TextView
+                android:id="@+id/chipAvengers"
+                style="@style/Widget.Marvel.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_chip_team"
+                android:textColor="@color/chip_team_text"
+                android:text="@string/team_avengers" />
+
+            <TextView
+                android:id="@+id/chipFantasticFour"
+                style="@style/Widget.Marvel.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/bg_chip_team"
+                android:textColor="@color/chip_team_text"
+                android:text="@string/team_fantastic_four" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Barra de filtro -->
+    <LinearLayout
+        android:id="@+id/filterBar"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_filter_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/teamChipsScroll">
+
+        <ImageView
+            android:id="@+id/btnCalendar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/filter_by_year"
+            android:padding="4dp"
+            android:src="@drawable/ic_calendar"
+            app:tint="@color/app_icon_inactive" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/app_divider" />
+
+        <LinearLayout
+            android:id="@+id/btnEra"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvEra"
+                style="@style/Text.Marvel.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all_eras"
+                android:textColor="@color/app_text_muted" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="2dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_chevron_down"
+                app:tint="@color/app_text_muted" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="9dp"
+            android:background="@color/app_divider" />
+
+        <ImageView
+            android:id="@+id/btnFilter"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/filter"
+            android:src="@drawable/ic_sliders"
+            app:tint="@color/app_icon_inactive" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTimeline"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="@dimen/screen_padding"
+        android:paddingBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintTop_toBottomOf="@id/filterBar"
+        tools:listitem="@layout/item_timeline" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="48dp"
+        android:indeterminateTint="@color/marvel_red"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterBar" />
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        style="@style/Text.Marvel.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_padding"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:text="@string/timeline_empty"
+        android:textColor="@color/app_text_secondary"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filterBar" />
+
+    <include
+        android:id="@+id/bottom_nav"
+        layout="@layout/include_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_nav_height"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

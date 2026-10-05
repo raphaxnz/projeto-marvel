@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Card de equipe (Home). Figma: 180x117 r15, imagem + scrim escuro + nome 18/500 no canto inferior esquerdo. -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Marvel.Card"
+    android:layout_width="@dimen/team_card_width"
+    android:layout_height="@dimen/team_card_height"
+    android:layout_marginEnd="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="15dp">
+
+    <ImageView
+        android:id="@+id/ivCover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/img_team_xmen" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_header_scrim" />
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/Text.Marvel.Subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/white"
+        tools:text="X-Men" />
+</com.google.android.material.card.MaterialCardView>

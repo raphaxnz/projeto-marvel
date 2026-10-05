@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Figma Ellipse 10: 380x380, gradiente linear #430503 → #A90C08 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <gradient android:angle="45" android:startColor="#430503" android:endColor="#A90C08" android:type="linear"/>
+</shape>

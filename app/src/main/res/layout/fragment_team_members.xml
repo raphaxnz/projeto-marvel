@@ -1,9 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#1E1E1E">
-    <androidx.viewpager2.widget.ViewPager2 android:id="@+id/vpMembers"
-        android:layout_width="match_parent" android:layout_height="match_parent" />
-    <View android:id="@+id/tapBack" android:layout_width="64dp" android:layout_height="72dp"
-        android:layout_gravity="top|start" android:clickable="true" android:focusable="true"
-        android:contentDescription="Voltar" />
-</FrameLayout>
+<!--
+  Membros da equipe (carrossel). Figma 8:14 / 9:38 / 10:58:
+    toolbar back + "X-MEN" + sol ·
+    painel principal 370x600 (cor do personagem) ancorado ao fundo, a partir de y=317 ·
+    faixas laterais 100x580 (cor do próximo/anterior) @ x=388 e x=-84 ·
+    arte 420x420 @ y=160 sobressaindo acima do painel ·
+    nome 50/500 branco minúsculo @ (39,706) ·
+    botões circulares brancos 80dp @ (315,580) → próximo | (4,580) ← anterior
+  O ViewPager2 ocupa a área abaixo da toolbar; cada página é item_member.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_marginTop="@dimen/toolbar_top_margin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpMembers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <FrameLayout
+        android:id="@+id/btnPrev"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/bg_circle_white"
+        android:contentDescription="@string/previous_member"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.56">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_chevron_left"
+            app:tint="@color/black" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/btnNext"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/bg_circle_white"
+        android:contentDescription="@string/next_member"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.56">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/black" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

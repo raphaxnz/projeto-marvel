@@ -1,54 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Home. Figma 12:121:
+    toolbar logo+sol · banner 412x220 @ y=102 (pager + dots) ·
+    "Heróis em destaque" 20/500 @ y=359 · bolinhas 80dp @ y=431 (arte 90x114 sobressaindo) ·
+    "Equipes" @ y=562 · cards 180x117 r15 @ y=607 · bottom nav 90dp
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E1E1E">
+    android:background="@color/app_background">
 
-    <ImageView
-        android:layout_width="0dp" android:layout_height="0dp"
-        android:contentDescription="@null" android:scaleType="fitXY"
-        android:src="@drawable/figma_home_dark"
-        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_marginTop="@dimen/toolbar_top_margin"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vpBanner"
-        android:layout_width="0dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:contentDescription="Banners em destaque"
-        app:layout_constraintWidth_percent="1"
-        app:layout_constraintHeight_percent="0.24"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.146"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    <View android:id="@+id/tapFeaturedHero" android:layout_width="0dp" android:layout_height="0dp"
-        android:clickable="true" android:focusable="true" android:contentDescription="Abrir herói em destaque"
-        app:layout_constraintWidth_percent="0.92" app:layout_constraintHeight_percent="0.16"
-        app:layout_constraintHorizontal_bias="0.5" app:layout_constraintVertical_bias="0.40"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <View android:id="@+id/tapTeam" android:layout_width="0dp" android:layout_height="0dp"
-        android:clickable="true" android:focusable="true" android:contentDescription="Abrir equipe"
-        app:layout_constraintWidth_percent="0.92" app:layout_constraintHeight_percent="0.22"
-        app:layout_constraintHorizontal_bias="0.5" app:layout_constraintVertical_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
+            <!-- Banner -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hero_banner_height"
+                android:layout_marginTop="22dp">
 
-    <View android:id="@+id/tapSearch" android:layout_width="0dp" android:layout_height="0dp"
-        android:clickable="true" android:focusable="true" android:contentDescription="Busca"
-        app:layout_constraintWidth_percent="0.33" app:layout_constraintHeight_percent="0.10"
-        app:layout_constraintHorizontal_bias="0.5" app:layout_constraintVertical_bias="1"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-    <View android:id="@+id/tapTimeline" android:layout_width="0dp" android:layout_height="0dp"
-        android:clickable="true" android:focusable="true" android:contentDescription="Linha do tempo"
-        app:layout_constraintWidth_percent="0.33" app:layout_constraintHeight_percent="0.10"
-        app:layout_constraintHorizontal_bias="1" app:layout_constraintVertical_bias="1"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" />
+                <LinearLayout
+                    android:id="@+id/bannerDots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/bannerDot1"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@drawable/bg_dot_active" />
+
+                    <View
+                        android:id="@+id/bannerDot2"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_dot_banner" />
+
+                    <View
+                        android:id="@+id/bannerDot3"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_dot_banner" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Heróis em destaque -->
+            <TextView
+                android:id="@+id/tvFeaturedTitle"
+                style="@style/Text.Marvel.Section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/screen_padding"
+                android:layout_marginTop="37dp"
+                android:text="@string/featured_heroes" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvHeroes"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/avatar_art_size"
+                android:layout_marginTop="19dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingHorizontal="14dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_hero_circle" />
+
+            <!-- Equipes -->
+            <TextView
+                android:id="@+id/tvTeamsTitle"
+                style="@style/Text.Marvel.Section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/screen_padding"
+                android:layout_marginTop="32dp"
+                android:text="@string/teams" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTeams"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/team_card_height"
+                android:layout_marginTop="15dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingHorizontal="@dimen/screen_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_team_card" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/bottom_nav"
+        layout="@layout/include_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_nav_height"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

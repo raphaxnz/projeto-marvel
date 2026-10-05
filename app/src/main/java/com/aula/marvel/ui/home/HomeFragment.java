@@ -12,50 +12,74 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
 import com.aula.marvel.R;
+import com.aula.marvel.data.MockData;
+import com.aula.marvel.data.api.MarvelRepository;
 import com.aula.marvel.databinding.FragmentHomeBinding;
-import com.aula.marvel.ui.common.ArtworkPagerAdapter;
+import com.aula.marvel.ui.common.BottomNav;
+import com.aula.marvel.ui.common.HeroCircleAdapter;
+import com.aula.marvel.ui.common.Toolbar;
 
 public final class HomeFragment extends Fragment {
+    private static final long BANNER_INTERVAL_MS = 4000;
     private FragmentHomeBinding binding;
     private final Handler bannerHandler = new Handler(Looper.getMainLooper());
     private final Runnable advanceBanner = () -> {
         if (binding == null) return;
-        binding.vpBanner.setCurrentItem((binding.vpBanner.getCurrentItem() + 1) % 3, true);
+        int count = binding.vpBanner.getAdapter() == null ? 0 : binding.vpBanner.getAdapter().getItemCount();
+        if (count > 0) binding.vpBanner.setCurrentItem((binding.vpBanner.getCurrentItem() + 1) % count, true);
     };
-    private final ViewPager2.OnPageChangeCallback bannerCallback =
-            new ViewPager2.OnPageChangeCallback() {
-                @Override public void onPageScrollStateChanged(int state) {
-                    bannerHandler.removeCallbacks(advanceBanner);
-                    if (state == ViewPager2.SCROLL_STATE_IDLE) {
-                        bannerHandler.postDelayed(advanceBanner, 4000);
-                    }
-                }
-            };
+    private final ViewPager2.OnPageChangeCallback bannerCallback = new ViewPager2.OnPageChangeCallback() {
+        @Override public void onPageSelected(int position) { renderDots(position); }
+        @Override public void onPageScrollStateChanged(int state) {
+            bannerHandler.removeCallbacks(advanceBanner);
+            if (state == ViewPager2.SCROLL_STATE_IDLE) bannerHandler.postDelayed(advanceBanner, BANNER_INTERVAL_MS);
+        }
+    };
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        binding.vpBanner.setAdapter(new ArtworkPagerAdapter(position -> go(R.id.searchFragment),
-                R.drawable.figma_search_result_dark,
-                R.drawable.figma_asset_01,
-                R.drawable.figma_asset_02));
+        Toolbar.logo(this, binding.toolbar);
+        BottomNav.bind(this, binding.bottomNav, R.id.homeFragment);
+
+        binding.vpBanner.setAdapter(new BannerAdapter(position -> go(R.id.searchFragment, null)));
         binding.vpBanner.registerOnPageChangeCallback(bannerCallback);
-        binding.tapFeaturedHero.setOnClickListener(v -> go(R.id.characterDetailFragment));
-        binding.tapTeam.setOnClickListener(v -> go(R.id.teamFragment));
-        binding.tapSearch.setOnClickListener(v -> go(R.id.searchFragment));
-        binding.tapTimeline.setOnClickListener(v -> go(R.id.timelineFragment));
+
+        MarvelRepository.get(requireContext()).featuredHeroes(apiHeroes -> {
+            if (binding == null) return;
+            binding.rvHeroes.setAdapter(new HeroCircleAdapter(apiHeroes, hero -> {
+            Bundle args = new Bundle();
+            args.putLong("heroId", hero.id);
+            go(R.id.characterDetailFragment, args);
+            }));
+        });
+
+        MarvelRepository.get(requireContext()).teams(apiTeams -> {
+            if (binding == null) return;
+            binding.rvTeams.setAdapter(new TeamCardAdapter(apiTeams, team -> {
+            Bundle args = new Bundle();
+            args.putLong("teamId", team.id);
+            go(R.id.teamFragment, args);
+            }));
+        });
         return binding.getRoot();
     }
 
-    private void go(int destination) {
-        NavHostFragment.findNavController(this).navigate(destination);
+    private void renderDots(int position) {
+        binding.bannerDot1.setBackgroundResource(position == 0 ? R.drawable.bg_dot_active : R.drawable.bg_dot_banner);
+        binding.bannerDot2.setBackgroundResource(position == 1 ? R.drawable.bg_dot_active : R.drawable.bg_dot_banner);
+        binding.bannerDot3.setBackgroundResource(position == 2 ? R.drawable.bg_dot_active : R.drawable.bg_dot_banner);
+    }
+
+    private void go(int destination, @Nullable Bundle args) {
+        NavHostFragment.findNavController(this).navigate(destination, args);
     }
 
     @Override public void onResume() {
         super.onResume();
         bannerHandler.removeCallbacks(advanceBanner);
-        bannerHandler.postDelayed(advanceBanner, 4000);
+        bannerHandler.postDelayed(advanceBanner, BANNER_INTERVAL_MS);
     }
 
     @Override public void onPause() {

@@ -1,43 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Bottom nav (Figma: 412x90, fundo #191919 / #EEEEEE, ícones 24dp, indicador 10x6 r8 abaixo do ativo) -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_nav"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_nav_height"
-    android:background="@color/app_surface_muted"
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:paddingHorizontal="28dp">
+    android:background="@color/app_nav_bg"
+    android:elevation="8dp">
 
     <ImageButton
         android:id="@+id/btn_nav_home"
         android:layout_width="0dp"
-        android:layout_height="@dimen/touch_target"
-        android:layout_weight="1"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/home"
-        android:padding="12dp"
-        android:src="@drawable/ic_home_24"
-        android:tint="@color/app_text_muted" />
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_nav_home"
+        app:layout_constraintEnd_toStartOf="@id/btn_nav_search"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/app_icon_inactive" />
 
     <ImageButton
         android:id="@+id/btn_nav_search"
         android:layout_width="0dp"
-        android:layout_height="@dimen/touch_target"
-        android:layout_weight="1"
+        android:layout_height="56dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/search"
-        android:padding="12dp"
-        android:src="@drawable/ic_search_24"
-        android:tint="@color/app_text_muted" />
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_nav_search"
+        app:layout_constraintEnd_toStartOf="@id/btn_nav_timeline"
+        app:layout_constraintStart_toEndOf="@id/btn_nav_home"
+        app:layout_constraintTop_toTopOf="@id/btn_nav_home"
+        app:tint="@color/app_icon_inactive" />
 
     <ImageButton
         android:id="@+id/btn_nav_timeline"
         android:layout_width="0dp"
-        android:layout_height="@dimen/touch_target"
-        android:layout_weight="1"
+        android:layout_height="56dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/timeline"
-        android:padding="12dp"
-        android:src="@drawable/ic_timeline_24"
-        android:tint="@color/app_text_muted" />
-</LinearLayout>
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_nav_timeline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_nav_search"
+        app:layout_constraintTop_toTopOf="@id/btn_nav_home"
+        app:tint="@color/app_icon_inactive" />
+
+    <View
+        android:id="@+id/nav_indicator"
+        android:layout_width="10dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/bg_nav_indicator"
+        app:layout_constraintEnd_toEndOf="@id/btn_nav_home"
+        app:layout_constraintStart_toStartOf="@id/btn_nav_home"
+        app:layout_constraintTop_toBottomOf="@id/btn_nav_home" />
+</androidx.constraintlayout.widget.ConstraintLayout>

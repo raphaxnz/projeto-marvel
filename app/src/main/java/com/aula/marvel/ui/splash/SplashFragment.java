@@ -19,21 +19,19 @@ public final class SplashFragment extends Fragment {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable openNext = () -> {
         if (!isAdded()) return;
-        boolean seen = requireContext().getSharedPreferences("marvel_preferences", 0)
-                .getBoolean("onboarding_seen_v2", false);
+        // O onboarding aparece toda vez que o app é aberto.
         NavOptions options = new NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build();
-        NavHostFragment.findNavController(this).navigate(
-                seen ? R.id.homeFragment : R.id.onboardingFragment, null, options);
+        NavHostFragment.findNavController(this).navigate(R.id.onboardingFragment, null, options);
     };
 
     @Nullable @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentSplashBinding.inflate(inflater, container, false);
-        binding.ivSplash.setAlpha(0f);
-        binding.ivSplash.setScaleX(.94f);
-        binding.ivSplash.setScaleY(.94f);
-        binding.ivSplash.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(650).start();
+        binding.ivLogo.setAlpha(0f);
+        binding.ivLogo.setScaleX(.94f);
+        binding.ivLogo.setScaleY(.94f);
+        binding.ivLogo.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(650).start();
         handler.postDelayed(openNext, 1700);
         return binding.getRoot();
     }
